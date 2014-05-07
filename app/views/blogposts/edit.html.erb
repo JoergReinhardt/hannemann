@@ -1,0 +1,21 @@
+<% provide(:title, "Blogpost ändern") %>
+<h1>Blogpost ändern</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@blogpost, url: blogpost_path(@blogpost.url_slug)) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :titel %>
+      <%= f.text_field :titel %>
+
+      <%= f.label :url_slug %>
+      <%= f.text_field :url_slug %>
+
+      <%= f.label :inhalt %>
+      <%= f.text_area :inhalt %>
+
+      <%= f.submit "Blogpost ändern", class: "btn btn-large btn-primary"%>
+    <% end %>
+  </div>
+</div>

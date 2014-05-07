@@ -1,0 +1,30 @@
+<% provide(:title, 'Benutzer editieren')%>
+<h1>Profil editieren</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user, url: user_path(@user.login)) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :login %>
+      <%= f.text_field :login %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password, "Passwort" %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Passwort wiederholen" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Änderungen speichern", class: "btn btn-large btn-primary"%>
+    <% end %>
+
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails">ändern</a>
+  </div>
+</div>

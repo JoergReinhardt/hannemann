@@ -1,0 +1,979 @@
+let SessionLoad = 1
+if &cp | set nocp | endif
+let s:cpo_save=&cpo
+set cpo&vim
+inoremap <silent> <S-Tab> =snipMate#BackwardsSnippet()
+inoremap <C-Tab> 	
+inoremap <silent> <Plug>delimitMateMRightMouse =delimitMate#Finish(1)<RightMouse>
+inoremap <silent> <Plug>delimitMateMLeftMouse =delimitMate#Finish(1)<LeftMouse>
+inoremap <silent> <Plug>delimitMateDel =delimitMate#Del()
+inoremap <silent> <Plug>delimitMateS-Tab =delimitMate#JumpAny("\<S-Tab>")
+inoremap <silent> <Plug>delimitMateSpace =delimitMate#ExpandSpace()
+inoremap <silent> <Plug>delimitMateCR =delimitMate#ExpandReturn()
+inoremap <silent> <expr> <Plug>delimitMateS-BS delimitMate#WithinEmptyPair() ? "\=delimitMate#Del()\" : "\<S-BS>"
+inoremap <silent> <Plug>delimitMateBS =delimitMate#BS()
+inoremap <silent> <Plug>delimitMate` =delimitMate#QuoteDelim("\`")
+inoremap <silent> <Plug>delimitMate' =delimitMate#QuoteDelim("\'")
+inoremap <silent> <Plug>delimitMate" =delimitMate#QuoteDelim("\"")
+inoremap <silent> <Plug>delimitMate] =delimitMate#JumpOut("\]")
+inoremap <silent> <Plug>delimitMate} =delimitMate#JumpOut("\}")
+inoremap <silent> <Plug>delimitMate) =delimitMate#JumpOut("\)")
+inoremap <silent> <Plug>delimitMate[ [=delimitMate#ParenDelim("]")
+inoremap <silent> <Plug>delimitMate{ {=delimitMate#ParenDelim("}")
+inoremap <silent> <Plug>delimitMate( (=delimitMate#ParenDelim(")")
+map  h
+xnoremap 	 s:let g:snipmate_content_visual=getreg( 1 )
+snoremap <silent> 	 i<Right>=snipMate#TriggerSnippet()
+nnoremap 	 w
+onoremap 	 w
+map <NL> j
+map  k
+map  l
+map  :w
+nmap o <Plug>ZoomWin
+snoremap  b<BS>
+snoremap % b<BS>%
+snoremap ' b<BS>'
+nnoremap ' `
+nmap ,ca <Plug>NERDCommenterAltDelims
+xmap ,cu <Plug>NERDCommenterUncomment
+nmap ,cu <Plug>NERDCommenterUncomment
+xmap ,cb <Plug>NERDCommenterAlignBoth
+nmap ,cb <Plug>NERDCommenterAlignBoth
+xmap ,cl <Plug>NERDCommenterAlignLeft
+nmap ,cl <Plug>NERDCommenterAlignLeft
+nmap ,cA <Plug>NERDCommenterAppend
+xmap ,cy <Plug>NERDCommenterYank
+nmap ,cy <Plug>NERDCommenterYank
+xmap ,cs <Plug>NERDCommenterSexy
+nmap ,cs <Plug>NERDCommenterSexy
+xmap ,ci <Plug>NERDCommenterInvert
+nmap ,ci <Plug>NERDCommenterInvert
+nmap ,c$ <Plug>NERDCommenterToEOL
+xmap ,cn <Plug>NERDCommenterNested
+nmap ,cn <Plug>NERDCommenterNested
+xmap ,cm <Plug>NERDCommenterMinimal
+nmap ,cm <Plug>NERDCommenterMinimal
+xmap ,c  <Plug>NERDCommenterToggle
+nmap ,c  <Plug>NERDCommenterToggle
+xmap ,cc <Plug>NERDCommenterComment
+nmap ,cc <Plug>NERDCommenterComment
+nmap <silent> ,slr :DBListVar
+xmap <silent> ,sa :DBVarRangeAssign
+nmap <silent> ,sap :'<,'>DBVarRangeAssign
+nmap <silent> ,sal :.,.DBVarRangeAssign
+nmap <silent> ,sas :1,$DBVarRangeAssign
+nmap ,so <Plug>DBOrientationToggle
+nmap ,sh <Plug>DBHistory
+nmap ,slv <Plug>DBListView
+nmap ,slp <Plug>DBListProcedure
+nmap ,slt <Plug>DBListTable
+xmap <silent> ,slc :exec 'DBListColumn "'.DB_getVisualBlock().'"'
+nmap ,slc <Plug>DBListColumn
+nmap ,sbp <Plug>DBPromptForBufferParameters
+nmap ,sdpa <Plug>DBDescribeProcedureAskName
+xmap <silent> ,sdp :exec 'DBDescribeProcedure "'.DB_getVisualBlock().'"'
+nmap ,sdp <Plug>DBDescribeProcedure
+nmap ,sdta <Plug>DBDescribeTableAskName
+xmap <silent> ,sdt :exec 'DBDescribeTable "'.DB_getVisualBlock().'"'
+nmap ,sdt <Plug>DBDescribeTable
+xmap <silent> ,sT :exec 'DBSelectFromTableTopX "'.DB_getVisualBlock().'"'
+nmap ,sT <Plug>DBSelectFromTopXTable
+nmap ,sta <Plug>DBSelectFromTableAskName
+nmap ,stw <Plug>DBSelectFromTableWithWhere
+xmap <silent> ,st :exec 'DBSelectFromTable "'.DB_getVisualBlock().'"'
+nmap ,st <Plug>DBSelectFromTable
+nmap <silent> ,sep :'<,'>DBExecRangeSQL
+nmap <silent> ,sel :.,.DBExecRangeSQL
+nmap <silent> ,sea :1,$DBExecRangeSQL
+nmap ,sE <Plug>DBExecSQLUnderTopXCursor
+nmap ,se <Plug>DBExecSQLUnderCursor
+xmap ,sE <Plug>DBExecVisualTopXSQL
+xmap ,se <Plug>DBExecVisualSQL
+nmap <silent> ,ba <Plug>BufKillAlt
+nmap <silent> ,bundo <Plug>BufKillUndo
+nmap <silent> ,!bw <Plug>BufKillBangBw
+nmap <silent> ,bw <Plug>BufKillBw
+nmap <silent> ,!bd <Plug>BufKillBangBd
+nmap <silent> ,bd <Plug>BufKillBd
+nmap <silent> ,!bun <Plug>BufKillBangBun
+nmap <silent> ,bun <Plug>BufKillBun
+nmap <silent> ,bf <Plug>BufKillForward
+nmap <silent> ,bb <Plug>BufKillBack
+map ,tt <Plug>AM_tt
+map ,tsq <Plug>AM_tsq
+map ,tsp <Plug>AM_tsp
+map ,tml <Plug>AM_tml
+map ,tab <Plug>AM_tab
+map ,m= <Plug>AM_m=
+map ,t@ <Plug>AM_t@
+map ,t~ <Plug>AM_t~
+map ,t? <Plug>AM_t?
+map ,w= <Plug>AM_w=
+map ,ts= <Plug>AM_ts=
+map ,ts< <Plug>AM_ts<
+map ,ts; <Plug>AM_ts;
+map ,ts: <Plug>AM_ts:
+map ,ts, <Plug>AM_ts,
+map ,t= <Plug>AM_t=
+map ,t< <Plug>AM_t<
+map ,t; <Plug>AM_t;
+map ,t: <Plug>AM_t:
+map ,t, <Plug>AM_t,
+map ,t# <Plug>AM_t#
+map ,t| <Plug>AM_t|
+map ,T~ <Plug>AM_T~
+map ,Tsp <Plug>AM_Tsp
+map ,Tab <Plug>AM_Tab
+map ,T@ <Plug>AM_T@
+map ,T? <Plug>AM_T?
+map ,T= <Plug>AM_T=
+map ,T< <Plug>AM_T<
+map ,T; <Plug>AM_T;
+map ,T: <Plug>AM_T:
+map ,Ts, <Plug>AM_Ts,
+map ,T, <Plug>AM_T,o
+map ,T# <Plug>AM_T#
+map ,T| <Plug>AM_T|
+map ,Htd <Plug>AM_Htd
+map ,anum <Plug>AM_aunum
+map ,aunum <Plug>AM_aenum
+map ,afnc <Plug>AM_afnc
+map ,adef <Plug>AM_adef
+map ,adec <Plug>AM_adec
+map ,ascom <Plug>AM_ascom
+map ,aocom <Plug>AM_aocom
+map ,adcom <Plug>AM_adcom
+map ,acom <Plug>AM_acom
+map ,abox <Plug>AM_abox
+map ,a( <Plug>AM_a(
+map ,a= <Plug>AM_a=
+map ,a< <Plug>AM_a<
+map ,a, <Plug>AM_a,
+map ,a? <Plug>AM_a?
+map ,rwp <Plug>RestoreWinPosn
+map ,swp <Plug>SaveWinPosn
+map ,ds <Plug>StopDrawIt
+map ,di <Plug>StartDrawIt
+nmap ,y :YRShow
+map , :Mru
+map ,u :GundoToggle
+map ,n :NERDTreeToggle
+nnoremap <silent> ,t :TagbarToggle
+map ,o :ZoomWin
+nnoremap <silent> , t :CommandTBuffer
+nnoremap <silent> ,,t :CommandT
+map ,re :Rextract 
+map ,rj :Rjavascript
+map ,rv :Rview
+map ,rs :Rstylesheet
+map ,rm :Rmodel
+map ,rd :Rmigration
+map ,rl :Rlayout
+map ,rh :Rhelper
+map ,rc :Rcontroller
+map ,rf :find 
+map ,rp :Rpreview 
+map ,rr :R
+map ,ra :A
+nnoremap ,l :call g:ToggleNuMode()
+map ,s :%s///g<Left><Left>
+map ,a c
+map ,d :cd ~/Projects/
+map ,m :marks:normal `
+vnoremap ,y "+y
+map ,p "+p
+map ,w :set nowrap!
+vmap < <gv
+nmap < <<
+vmap > >gv
+nmap > >>
+noremap <silent> JJ :call jquerydoc#search(expand('<cword>'))
+vmap N Nzz
+omap N Nzz
+nmap Q gqap
+vmap Q gq
+noremap <silent> RR :call rubydoc#search('rails',expand('<cword>'))
+noremap <silent> RS :call rubydoc#search('rspec',expand('<cword>'))
+noremap <silent> RB :call rubydoc#search('ruby',expand('<cword>'))
+xmap S <Plug>VSurround
+snoremap U b<BS>U
+map Y y$
+vmap [% [%m'gv``
+snoremap \ b<BS>\
+nmap \\u <Plug>CommentaryUndo
+nmap \\\ <Plug>CommentaryLine
+xmap \\ <Plug>Commentary
+vmap ]f :call PythonDec("function", 1)
+nmap ]f :call PythonDec("function", 1)
+omap ]f :call PythonDec("function", 1)
+vmap ]F :call PythonDec("function", -1)
+nmap ]F :call PythonDec("function", -1)
+omap ]F :call PythonDec("function", -1)
+vmap ]j :call PythonDec("class", 1)
+nmap ]j :call PythonDec("class", 1)
+omap ]j :call PythonDec("class", 1)
+vmap ]J :call PythonDec("class", -1)
+nmap ]J :call PythonDec("class", -1)
+omap ]J :call PythonDec("class", -1)
+map ]<Down> :call PythonNextLine(1)
+map ]<Up> :call PythonNextLine(-1)
+map ]d :call PythonSelectObject("function")
+map ]c :call PythonSelectObject("class")
+vmap ]u :call PythonUncommentSelection()
+nmap ]u :call PythonUncommentSelection()
+omap ]u :call PythonUncommentSelection()
+vmap ]# :call PythonCommentSelection()
+nmap ]# :call PythonCommentSelection()
+omap ]# :call PythonCommentSelection()
+vmap ]> >
+nmap ]> ]tV]e>
+omap ]> ]tV]e>
+vmap ]< <
+nmap ]< ]tV]e<
+omap ]< ]tV]e<
+map ]v ]tV]e
+vmap ]e :PEoBm'gv``
+nmap ]e :PEoB
+omap ]e :PEoB
+vmap ]t :PBOBm'gv``
+nmap ]t :PBoB
+omap ]t :PBoB
+vmap ]% ]%m'gv``
+snoremap ^ b<BS>^
+snoremap ` b<BS>`
+nnoremap ` '
+vmap a% [%v]%
+nmap cs <Plug>Csurround
+nmap ds <Plug>Dsurround
+nmap gx <Plug>NetrwBrowseX
+xmap gS <Plug>VgSurround
+nnoremap j gj
+nnoremap k gk
+vmap n nzz
+omap n nzz
+xnoremap <silent> s :echoerr 'surround.vim: Visual mode s has been removed in favor of S'
+nmap ySS <Plug>YSsurround
+nmap ySs <Plug>YSsurround
+nmap yss <Plug>Yssurround
+nmap yS <Plug>YSurround
+nmap ys <Plug>Ysurround
+snoremap <Left> bi
+snoremap <Right> a
+snoremap <BS> b<BS>
+snoremap <silent> <S-Tab> i<Right>=snipMate#BackwardsSnippet()
+nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
+nnoremap <silent> <Plug>SurroundRepeat .
+xnoremap <silent> <Plug>NERDCommenterUncomment :call NERDComment("x", "Uncomment")
+nnoremap <silent> <Plug>NERDCommenterUncomment :call NERDComment("n", "Uncomment")
+xnoremap <silent> <Plug>NERDCommenterAlignBoth :call NERDComment("x", "AlignBoth")
+nnoremap <silent> <Plug>NERDCommenterAlignBoth :call NERDComment("n", "AlignBoth")
+xnoremap <silent> <Plug>NERDCommenterAlignLeft :call NERDComment("x", "AlignLeft")
+nnoremap <silent> <Plug>NERDCommenterAlignLeft :call NERDComment("n", "AlignLeft")
+nnoremap <silent> <Plug>NERDCommenterAppend :call NERDComment("n", "Append")
+xnoremap <silent> <Plug>NERDCommenterYank :call NERDComment("x", "Yank")
+nnoremap <silent> <Plug>NERDCommenterYank :call NERDComment("n", "Yank")
+xnoremap <silent> <Plug>NERDCommenterSexy :call NERDComment("x", "Sexy")
+nnoremap <silent> <Plug>NERDCommenterSexy :call NERDComment("n", "Sexy")
+xnoremap <silent> <Plug>NERDCommenterInvert :call NERDComment("x", "Invert")
+nnoremap <silent> <Plug>NERDCommenterInvert :call NERDComment("n", "Invert")
+nnoremap <silent> <Plug>NERDCommenterToEOL :call NERDComment("n", "ToEOL")
+xnoremap <silent> <Plug>NERDCommenterNested :call NERDComment("x", "Nested")
+nnoremap <silent> <Plug>NERDCommenterNested :call NERDComment("n", "Nested")
+xnoremap <silent> <Plug>NERDCommenterMinimal :call NERDComment("x", "Minimal")
+nnoremap <silent> <Plug>NERDCommenterMinimal :call NERDComment("n", "Minimal")
+xnoremap <silent> <Plug>NERDCommenterToggle :call NERDComment("x", "Toggle")
+nnoremap <silent> <Plug>NERDCommenterToggle :call NERDComment("n", "Toggle")
+xnoremap <silent> <Plug>NERDCommenterComment :call NERDComment("x", "Comment")
+nnoremap <silent> <Plug>NERDCommenterComment :call NERDComment("n", "Comment")
+nmap <SNR>17_WE <Plug>AlignMapsWrapperEnd
+map <SNR>17_WS <Plug>AlignMapsWrapperStart
+nmap <silent> <Plug>RestoreWinPosn :call RestoreWinPosn()
+nmap <silent> <Plug>SaveWinPosn :call SaveWinPosn()
+map <silent> <Plug>StopDrawIt :set lz:call DrawIt#StopDrawIt():set nolz
+map <silent> <Plug>StartDrawIt :set lz:call DrawIt#StartDrawIt():set nolz
+nnoremap <silent> <F10> :TbToggle
+nnoremap <silent> <F9> :TagbarToggle
+nnoremap <silent> <F8> :NERDTreeToggle
+nnoremap <silent> <F7> :VoomToggle
+map <F12> :set suffixesadd=.html.erbgf
+map <F11> :set suffixesadd=.rbgf
+nnoremap <S-Tab> W
+xnoremap <S-Tab> W
+onoremap <S-Tab> W
+nmap <Right> >
+xmap <Right> >
+omap <Right> >
+nmap <Left> <
+xmap <Left> <
+omap <Left> <
+map <Down> +
+map <Up> -
+nmap <C-CR> O0c$j
+nmap <S-CR> o0c$k
+nnoremap <S-F1> :helpgrep 
+map <F1> :exec "help ".expand("<cword>")
+nmap <silent> <S-F5> :so $MYVIMRC
+nmap <silent> <F5> :e $MYVIMRC
+cnoremap  <Home>
+cnoremap  <Left>
+cnoremap  <End>
+cnoremap  <Right>
+imap S <Plug>ISurround
+imap s <Plug>Isurround
+inoremap <silent> 	 u=snipMate#TriggerSnippet()
+inoremap  <Del>
+imap  <Plug>SuperTabForward
+cnoremap  <End>
+imap  <Plug>SuperTabBackward
+cnoremap  <Up>
+inoremap <silent> 	 =snipMate#ShowAvailableSnips()
+imap  :wa
+imap <silent> OC <Right>
+cmap ,p +
+imap ;; </
+nmap Ã¬ :bn
+nmap Ã¨ :bp
+imap jk 
+cmap w!! w !sudo tee % >/dev/null
+let &cpo=s:cpo_save
+unlet s:cpo_save
+set autoread
+set backspace=indent,eol,start
+set breakat=\ ^I!@*-+;:,./?
+set clipboard=autoselect,exclude:cons\\|linux,unnamed,+
+set complete=.,w,b,t,i
+set confirm
+set copyindent
+set noequalalways
+set errorformat=%*[^\"]\"%f\"%*\\D%l:\ %m,\"%f\"%*\\D%l:\ %m,%-G%f:%l:\ (Each\ undeclared\ identifier\ is\ reported\ only\ once,%-G%f:%l:\ for\ each\ function\ it\ appears\ in.),%-GIn\ file\ included\ from\ %f:%l:%c:,%-GIn\ file\ included\ from\ %f:%l:%c,%-GIn\ file\ included\ from\ %f:%l,%-Gfrom\ %f:%l:%c,%-Gfrom\ %f:%l,%f:%l:%c:%m,%f(%l):%m,%f:%l:%m,\"%f\"\\,\ line\ %l%*\\D%c%*[^\ ]\ %m,%D%*\\a[%*\\d]:\ Entering\ directory\ `%f',%X%*\\a[%*\\d]:\ Leaving\ directory\ `%f',%D%*\\a:\ Entering\ directory\ `%f',%X%*\\a:\ Leaving\ directory\ `%f',%DMaking\ %*\\a\ in\ %f,%f|%l|\ %m,%*[\"]%f%*[\"]\\,\ line\ %l:\ %m
+set expandtab
+set fileencodings=ucs-bom,utf-8,default,latin1
+set helplang=de
+set hidden
+set history=1000
+set hlsearch
+set ignorecase
+set includeexpr=substitute(v:fname,'s$','','g')
+set incsearch
+set laststatus=2
+set listchars=eol:Â¬,nbsp:â‹…,tab:>-,trail:â‹…,extends:>,precedes:<
+set makeprg=pylint\ --reports=n\ --output-format=parseable\ %:p
+set nomodeline
+set pastetoggle=<F2>
+set path=.,/usr/include,,,~/Projects/core/app/**,~Projects/core/lib/**
+set runtimepath=~/.vim,~/.vim/bundle/DrawIt,~/.vim/bundle/GoogleReader,~/.vim/bundle/Gundo,~/.vim/bundle/VOoM,~/.vim/bundle/align,~/.vim/bundle/autocomplpop,~/.vim/bundle/bufkill,~/.vim/bundle/commandT,~/.vim/bundle/commentary.vim,~/.vim/bundle/css-color,~/.vim/bundle/dbext.vim,~/.vim/bundle/delimitMate,~/.vim/bundle/fugitive,~/.vim/bundle/gtags.vim,~/.vim/bundle/haml.vim,~/.vim/bundle/indexed-search,~/.vim/bundle/jquery-doc,~/.vim/bundle/matchit,~/.vim/bundle/mru.vim,~/.vim/bundle/mw-utils,~/.vim/bundle/nerd-commenter,~/.vim/bundle/nerdtree,~/.vim/bundle/python-mode,~/.vim/bundle/python.vim,~/.vim/bundle/rails.vim,~/.vim/bundle/repeat.vim,~/.vim/bundle/ruby-doc,~/.vim/bundle/ruby-matchit,~/.vim/bundle/rubycomplete.vim,~/.vim/bundle/snipmate,~/.vim/bundle/supertab,~/.vim/bundle/surround.vim,~/.vim/bundle/tabbar,~/.vim/bundle/tagbar,~/.vim/bundle/taglist.vim,~/.vim/bundle/tlib,~/.vim/bundle/yankring,~/.vim/bundle/zoomwin,/usr/local/share/vim/vimfiles,/usr/local/share/vim/vim73,/usr/local/share/vim/vimfiles/after,~/.vim/bundle/css-color/after,~/.vim/bundle/snipmate/after,~/.vim/after
+set shiftround
+set shiftwidth=2
+set shortmess=aIoOTts
+set showbreak=â€¦
+set showcmd
+set showmatch
+set smartcase
+set smartindent
+set softtabstop=2
+set nostartofline
+set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %=\ lin:%l,%L\ col:%c%V\ pos:%o\ ascii:%b\ %P
+set suffixesadd=.rb
+set noswapfile
+set tabstop=2
+set notimeout
+set title
+set ttimeout
+set ttimeoutlen=200
+set undodir=~/.undofilesvim
+set undofile
+set viminfo='50,\"100,:100,n~/.viminfo
+set visualbell
+set whichwrap=<,>,[,],h,l
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildmenu
+set wildmode=list:longest,full
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let v:this_session=expand("<sfile>:p")
+silent only
+cd ~/dev/rails/hannemann
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +967 railstutorial.rst
+silent! argdel *
+edit railstutorial.rst
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+2wincmd h
+wincmd w
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 26 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 115 + 97) / 194)
+exe 'vert 3resize ' . ((&columns * 51 + 97) / 194)
+argglobal
+enew
+file NERD_tree_1
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <RightMouse> <Plug>delimitMateMRightMouse
+imap <buffer> <LeftMouse> <Plug>delimitMateMLeftMouse
+imap <buffer> <S-Up> <Plug>delimitMateS-Up
+imap <buffer> <S-Down> <Plug>delimitMateS-Down
+imap <buffer> <PageDown> <Plug>delimitMatePageDown
+imap <buffer> <PageUp> <Plug>delimitMatePageUp
+imap <buffer> <Down> <Plug>delimitMateDown
+imap <buffer> <Up> <Plug>delimitMateUp
+imap <buffer> <C-Right> <Plug>delimitMateC-Right
+imap <buffer> <C-Left> <Plug>delimitMateC-Left
+imap <buffer> <End> <Plug>delimitMateEnd
+imap <buffer> <Home> <Plug>delimitMateHome
+imap <buffer> <Right> <Plug>delimitMateRight
+imap <buffer> <Left> <Plug>delimitMateLeft
+imap <buffer> <Del> <Plug>delimitMateDel
+imap <buffer> <S-BS> <Plug>delimitMateS-BS
+imap <buffer> <BS> <Plug>delimitMateBS
+inoremap <buffer> <Plug>delimitMateJumpMany =len(b:_l_delimitMate_buffer) ? delimitMate#Finish(0) : delimitMate#JumpMany()
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+nmap <buffer> gf <Plug>RailsFind
+imap <buffer> <silent> g <Plug>delimitMateJumpMany
+imap <buffer>  <Plug>delimitMateEsc
+imap <buffer> " <Plug>delimitMate"
+imap <buffer> ' <Plug>delimitMate'
+imap <buffer> ( <Plug>delimitMate(
+imap <buffer> ) <Plug>delimitMate)
+imap <buffer> [ <Plug>delimitMate[
+imap <buffer> ] <Plug>delimitMate]
+imap <buffer> ` <Plug>delimitMate`
+imap <buffer> { <Plug>delimitMate{
+imap <buffer> } <Plug>delimitMate}
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal noautoindent
+setlocal nobinary
+setlocal bufhidden=hide
+setlocal nobuflisted
+setlocal buftype=nofile
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,t,i
+setlocal completefunc=
+setlocal copyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'nerdtree'
+setlocal filetype=nerdtree
+endif
+setlocal foldcolumn=0
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal nomodeline
+setlocal nomodifiable
+setlocal nrformats=octal,hex
+set number
+setlocal nonumber
+setlocal numberwidth=4
+setlocal omnifunc=
+setlocal path=.,~/dev/rails/hannemann,~/dev/rails/hannemann/app,~/dev/rails/hannemann/app/models,~/dev/rails/hannemann/app/controllers,~/dev/rails/hannemann/app/helpers,~/dev/rails/hannemann/config,~/dev/rails/hannemann/lib,~/dev/rails/hannemann/app/views,~/dev/rails/hannemann/test,~/dev/rails/hannemann/test/unit,~/dev/rails/hannemann/test/functional,~/dev/rails/hannemann/test/integration,~/dev/rails/hannemann/spec,~/dev/rails/hannemann/spec/models,~/dev/rails/hannemann/spec/controllers,~/dev/rails/hannemann/spec/helpers,~/dev/rails/hannemann/spec/views,~/dev/rails/hannemann/spec/lib,~/dev/rails/hannemann/spec/requests,~/dev/rails/hannemann/spec/integration,~/dev/rails/hannemann/app/*,~/dev/rails/hannemann/vendor,~/dev/rails/hannemann/vendor/plugins/*/lib,~/dev/rails/hannemann/vendor/plugins/*/test,~/dev/rails/hannemann/vendor/rails/*/lib,~/dev/rails/hannemann/vendor/rails/*/test,/usr/include,,,~/Projects/core/app/**,~Projects/core/lib/**
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%{exists('b:NERDTreeRoot')?b:NERDTreeRoot.path.str():''}
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'nerdtree'
+setlocal syntax=nerdtree
+endif
+setlocal tabstop=2
+setlocal tags=~/dev/rails/hannemann/tmp/tags,~/dev/rails/hannemann/.git/tags,./tags,tags,~/dev/rails/hannemann/tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal nowrap
+setlocal wrapmargin=0
+wincmd w
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <RightMouse> <Plug>delimitMateMRightMouse
+imap <buffer> <LeftMouse> <Plug>delimitMateMLeftMouse
+imap <buffer> <S-Up> <Plug>delimitMateS-Up
+imap <buffer> <S-Down> <Plug>delimitMateS-Down
+imap <buffer> <PageDown> <Plug>delimitMatePageDown
+imap <buffer> <PageUp> <Plug>delimitMatePageUp
+imap <buffer> <Down> <Plug>delimitMateDown
+imap <buffer> <Up> <Plug>delimitMateUp
+imap <buffer> <C-Right> <Plug>delimitMateC-Right
+imap <buffer> <C-Left> <Plug>delimitMateC-Left
+imap <buffer> <End> <Plug>delimitMateEnd
+imap <buffer> <Home> <Plug>delimitMateHome
+imap <buffer> <Right> <Plug>delimitMateRight
+imap <buffer> <Left> <Plug>delimitMateLeft
+imap <buffer> <Del> <Plug>delimitMateDel
+imap <buffer> <S-BS> <Plug>delimitMateS-BS
+imap <buffer> <BS> <Plug>delimitMateBS
+inoremap <buffer> <Plug>delimitMateJumpMany =len(b:_l_delimitMate_buffer) ? delimitMate#Finish(0) : delimitMate#JumpMany()
+nnoremap <buffer> <silent> 	 :call Voom_ToTreeOrBodyWin()
+nnoremap <buffer> <silent>  :call Voom_BodySelect()
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+nmap <buffer> gf <Plug>RailsFind
+imap <buffer> <silent> g <Plug>delimitMateJumpMany
+imap <buffer>  <Plug>delimitMateEsc
+imap <buffer> " <Plug>delimitMate"
+imap <buffer> ' <Plug>delimitMate'
+imap <buffer> ( <Plug>delimitMate(
+imap <buffer> ) <Plug>delimitMate)
+imap <buffer> [ <Plug>delimitMate[
+imap <buffer> ] <Plug>delimitMate]
+imap <buffer> ` <Plug>delimitMate`
+imap <buffer> { <Plug>delimitMate{
+imap <buffer> } <Plug>delimitMate}
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal noautoindent
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=fb:..
+setlocal commentstring=..\ %s
+setlocal complete=.,w,b,t,i
+setlocal completefunc=
+setlocal copyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'rst'
+setlocal filetype=rst
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcroql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=GetRSTIndent()
+setlocal indentkeys=!^F,o,O
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal nomodeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=
+setlocal path=.,~/dev/rails/hannemann,~/dev/rails/hannemann/app,~/dev/rails/hannemann/app/models,~/dev/rails/hannemann/app/controllers,~/dev/rails/hannemann/app/helpers,~/dev/rails/hannemann/config,~/dev/rails/hannemann/lib,~/dev/rails/hannemann/app/views,~/dev/rails/hannemann/test,~/dev/rails/hannemann/test/unit,~/dev/rails/hannemann/test/functional,~/dev/rails/hannemann/test/integration,~/dev/rails/hannemann/spec,~/dev/rails/hannemann/spec/models,~/dev/rails/hannemann/spec/controllers,~/dev/rails/hannemann/spec/helpers,~/dev/rails/hannemann/spec/views,~/dev/rails/hannemann/spec/lib,~/dev/rails/hannemann/spec/requests,~/dev/rails/hannemann/spec/integration,~/dev/rails/hannemann/app/*,~/dev/rails/hannemann/vendor,~/dev/rails/hannemann/vendor/plugins/*/lib,~/dev/rails/hannemann/vendor/plugins/*/test,~/dev/rails/hannemann/vendor/rails/*/lib,~/dev/rails/hannemann/vendor/rails/*/test,/usr/include,,,~/Projects/core/app/**,~Projects/core/lib/**
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'rst'
+setlocal syntax=rst
+endif
+setlocal tabstop=2
+setlocal tags=~/dev/rails/hannemann/tmp/tags,~/dev/rails/hannemann/.git/tags,./tags,tags,~/dev/rails/hannemann/tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 3677 - ((0 * winheight(0) + 21) / 43)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+3677
+normal! 0
+wincmd w
+argglobal
+enew
+file railstutorial.rst_VOOM1
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <RightMouse> <Plug>delimitMateMRightMouse
+imap <buffer> <LeftMouse> <Plug>delimitMateMLeftMouse
+imap <buffer> <S-Up> <Plug>delimitMateS-Up
+imap <buffer> <S-Down> <Plug>delimitMateS-Down
+imap <buffer> <PageDown> <Plug>delimitMatePageDown
+imap <buffer> <PageUp> <Plug>delimitMatePageUp
+imap <buffer> <Down> <Plug>delimitMateDown
+imap <buffer> <Up> <Plug>delimitMateUp
+imap <buffer> <C-Right> <Plug>delimitMateC-Right
+imap <buffer> <C-Left> <Plug>delimitMateC-Left
+imap <buffer> <End> <Plug>delimitMateEnd
+imap <buffer> <Home> <Plug>delimitMateHome
+imap <buffer> <Right> <Plug>delimitMateRight
+imap <buffer> <Left> <Plug>delimitMateLeft
+imap <buffer> <Del> <Plug>delimitMateDel
+imap <buffer> <S-BS> <Plug>delimitMateS-BS
+imap <buffer> <BS> <Plug>delimitMateBS
+inoremap <buffer> <silent> <LeftRelease> <LeftRelease>
+inoremap <buffer> <Plug>delimitMateJumpMany =len(b:_l_delimitMate_buffer) ? delimitMate#Finish(0) : delimitMate#JumpMany()
+vnoremap <buffer> <silent> 	 :call Voom_ToTreeOrBodyWin()
+nnoremap <buffer> <silent> 	 :call Voom_ToTreeOrBodyWin()
+vnoremap <buffer> <silent>  :call Voom_TreeSelect(0)
+nnoremap <buffer> <silent>  :call Voom_TreeSelect(0)
+noremap <buffer> <silent>  <Nop>
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+noremap <buffer> <silent>  
+nnoremap <buffer> <silent>   :call Voom_TreeToggleFold()
+nnoremap <buffer> <silent> + :call Voom_TreeToStartupNode()
+noremap <buffer> <silent> . <Nop>
+vnoremap <buffer> <silent> << :call Voom_Oop('left', 'v')
+nnoremap <buffer> <silent> << :call Voom_Oop('left', 'n')
+noremap <buffer> <silent> < 
+nnoremap <buffer> <silent> = :call Voom_TreeToSelected()
+vnoremap <buffer> <silent> = <Nop>
+onoremap <buffer> <silent> = <Nop>
+vnoremap <buffer> <silent> >> :call Voom_Oop('right', 'v')
+nnoremap <buffer> <silent> >> :call Voom_Oop('right', 'n')
+noremap <buffer> <silent> > 
+nnoremap <buffer> <silent> A :call Voom_OopEdit()
+vnoremap <buffer> <silent> A <Nop>
+onoremap <buffer> <silent> A <Nop>
+vnoremap <buffer> <silent> C :call Voom_Tree_CO('zC','v')
+nnoremap <buffer> <silent> C :call Voom_Tree_CO('zC','n')
+onoremap <buffer> <silent> C <Nop>
+vnoremap <buffer> <silent> D :call Voom_Tree_KJUD('D','v')
+nnoremap <buffer> <silent> D :call Voom_Tree_KJUD('D','n')
+onoremap <buffer> <silent> D <Nop>
+nnoremap <buffer> <silent> I :call Voom_OopEdit()
+vnoremap <buffer> <silent> I <Nop>
+onoremap <buffer> <silent> I <Nop>
+vnoremap <buffer> <silent> J :call Voom_Tree_KJUD('J','v')
+nnoremap <buffer> <silent> J :call Voom_Tree_KJUD('J','n')
+onoremap <buffer> <silent> J <Nop>
+vnoremap <buffer> <silent> K :call Voom_Tree_KJUD('K','v')
+nnoremap <buffer> <silent> K :call Voom_Tree_KJUD('K','n')
+vnoremap <buffer> <silent> O :call Voom_Tree_CO('zO','v')
+nnoremap <buffer> <silent> O :call Voom_Tree_CO('zO','n')
+onoremap <buffer> <silent> O <Nop>
+nnoremap <buffer> <silent> P :call Voom_Tree_Pco('P','n')
+vnoremap <buffer> <silent> P <Nop>
+onoremap <buffer> <silent> P <Nop>
+vnoremap <buffer> <silent> R :call Voom_OopSelectBodyRange('v')
+nnoremap <buffer> <silent> R :call Voom_OopSelectBodyRange('n')
+onoremap <buffer> <silent> R <Nop>
+nnoremap <buffer> <silent> S :call Voom_EchoUNL()
+vnoremap <buffer> <silent> S <Nop>
+onoremap <buffer> <silent> S <Nop>
+vnoremap <buffer> <silent> U :call Voom_Tree_KJUD('U','v')
+nnoremap <buffer> <silent> U :call Voom_Tree_KJUD('U','n')
+onoremap <buffer> <silent> U <Nop>
+nnoremap <buffer> <silent> X :call Voom_TreeToMark(1)
+vnoremap <buffer> <silent> X <Nop>
+onoremap <buffer> <silent> X <Nop>
+nnoremap <buffer> <silent> \e :call Voom_Exec('')
+nnoremap <buffer> <silent> \far :call Voom_OopFolding(1,line('$'), 'restore')
+nnoremap <buffer> <silent> \fas :call Voom_OopFolding(1,line('$'), 'save')
+nnoremap <buffer> <silent> \fr :call Voom_OopFolding(line('.'),line('.'), 'restore')
+nnoremap <buffer> <silent> \fs :call Voom_OopFolding(line('.'),line('.'), 'save')
+nnoremap <buffer> <silent> \= :call Voom_OopMarkStartup()
+vnoremap <buffer> <silent> \M :call Voom_OopMark('unmark', 'v')
+nnoremap <buffer> <silent> \M :call Voom_OopMark('unmark', 'n')
+vnoremap <buffer> <silent> \m :call Voom_OopMark('mark', 'v')
+nnoremap <buffer> <silent> \m :call Voom_OopMark('mark', 'n')
+vnoremap <buffer> <silent> \r :call Voom_Oop('right', 'v')
+nnoremap <buffer> <silent> \r :call Voom_Oop('right', 'n')
+vnoremap <buffer> <silent> \l :call Voom_Oop('left', 'v')
+nnoremap <buffer> <silent> \l :call Voom_Oop('left', 'n')
+vnoremap <buffer> <silent> \d :call Voom_Oop('down', 'v')
+nnoremap <buffer> <silent> \d :call Voom_Oop('down', 'n')
+vnoremap <buffer> <silent> \u :call Voom_Oop('up', 'v')
+nnoremap <buffer> <silent> \u :call Voom_Oop('up', 'n')
+nnoremap <buffer> <silent> \I :call Voom_OopInsert('as_child')
+nnoremap <buffer> <silent> \i :call Voom_OopInsert('')
+vnoremap <buffer> <silent> ^^ :call Voom_Oop('up', 'v')
+nnoremap <buffer> <silent> ^^ :call Voom_Oop('up', 'n')
+noremap <buffer> <silent> ^ 
+vnoremap <buffer> <silent> __ :call Voom_Oop('down', 'v')
+nnoremap <buffer> <silent> __ :call Voom_Oop('down', 'n')
+noremap <buffer> <silent> _ 
+nnoremap <buffer> <silent> a :call Voom_OopEdit()
+vnoremap <buffer> <silent> a <Nop>
+onoremap <buffer> <silent> a <Nop>
+nnoremap <buffer> <silent> c :call Voom_Tree_Pco('c','n')
+vnoremap <buffer> <silent> c <Nop>
+onoremap <buffer> <silent> c <Nop>
+vnoremap <buffer> <silent> dd :call Voom_Oop('cut', 'v')
+nnoremap <buffer> <silent> dd :call Voom_Oop('cut', 'n')
+noremap <buffer> <silent> d 
+nmap <buffer> gf <Plug>RailsFind
+nnoremap <buffer> <silent> i :call Voom_OopEdit()
+vnoremap <buffer> <silent> i <Nop>
+onoremap <buffer> <silent> i <Nop>
+nnoremap <buffer> <silent> o :call Voom_Tree_Pco('o','n')
+vnoremap <buffer> <silent> o <Nop>
+onoremap <buffer> <silent> o <Nop>
+nnoremap <buffer> <silent> pp :call Voom_OopPaste()
+noremap <buffer> <silent> p 
+nnoremap <buffer> <silent> q :call Voom_DeleteOutline()
+noremap <buffer> <silent> r <Nop>
+nnoremap <buffer> <silent> s :echo getline('.')[(stridx(getline('.'),'|')+1):]
+vnoremap <buffer> <silent> s <Nop>
+onoremap <buffer> <silent> s <Nop>
+noremap <buffer> <silent> u <Nop>
+nnoremap <buffer> <silent> x :call Voom_TreeToMark(0)
+vnoremap <buffer> <silent> x <Nop>
+onoremap <buffer> <silent> x <Nop>
+vnoremap <buffer> <silent> yy :call Voom_Oop('copy', 'v')
+nnoremap <buffer> <silent> yy :call Voom_Oop('copy', 'n')
+noremap <buffer> <silent> zE <Nop>
+noremap <buffer> <silent> zD <Nop>
+noremap <buffer> <silent> zd <Nop>
+noremap <buffer> <silent> zF <Nop>
+noremap <buffer> <silent> zf <Nop>
+vnoremap <buffer> <silent> <C-Right> :call Voom_Oop('right', 'v')
+nnoremap <buffer> <silent> <C-Right> :call Voom_Oop('right', 'n')
+vnoremap <buffer> <silent> <C-Left> :call Voom_Oop('left', 'v')
+nnoremap <buffer> <silent> <C-Left> :call Voom_Oop('left', 'n')
+vnoremap <buffer> <silent> <C-Down> :call Voom_Oop('down', 'v')
+nnoremap <buffer> <silent> <C-Down> :call Voom_Oop('down', 'n')
+vnoremap <buffer> <silent> <C-Up> :call Voom_Oop('up', 'v')
+nnoremap <buffer> <silent> <C-Up> :call Voom_Oop('up', 'n')
+nnoremap <buffer> <silent> <Right> :call Voom_TreeRight()
+nnoremap <buffer> <silent> <Left> :call Voom_TreeLeft()
+nnoremap <buffer> <silent> <Up> <Up>:call Voom_TreeSelect(1)
+nnoremap <buffer> <silent> <Down> <Down>:call Voom_TreeSelect(1)
+nnoremap <buffer> <silent> <2-LeftMouse> <Nop>
+nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call Voom_TreeMouseClick()
+noremap <buffer> <silent> <Del> <Nop>
+noremap <buffer> <silent> <Insert> <Nop>
+imap <buffer> <silent> g <Plug>delimitMateJumpMany
+imap <buffer>  <Plug>delimitMateEsc
+imap <buffer> " <Plug>delimitMate"
+imap <buffer> ' <Plug>delimitMate'
+imap <buffer> ( <Plug>delimitMate(
+imap <buffer> ) <Plug>delimitMate)
+imap <buffer> [ <Plug>delimitMate[
+imap <buffer> ] <Plug>delimitMate]
+imap <buffer> ` <Plug>delimitMate`
+imap <buffer> { <Plug>delimitMate{
+imap <buffer> } <Plug>delimitMate}
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal noautoindent
+setlocal nobinary
+setlocal bufhidden=wipe
+setlocal nobuflisted
+setlocal buftype=nofile
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,t,i
+setlocal completefunc=
+setlocal copyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'voomtree'
+setlocal filetype=voomtree
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=Voom_TreeFoldexpr(v:lnum)
+setlocal foldignore=#
+setlocal foldlevel=2
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=expr
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=getline(v:foldstart).'\ \ \ /'.(v:foldend-v:foldstart)
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal nomodeline
+setlocal nomodifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=
+setlocal path=.,~/dev/rails/hannemann,~/dev/rails/hannemann/app,~/dev/rails/hannemann/app/models,~/dev/rails/hannemann/app/controllers,~/dev/rails/hannemann/app/helpers,~/dev/rails/hannemann/config,~/dev/rails/hannemann/lib,~/dev/rails/hannemann/app/views,~/dev/rails/hannemann/test,~/dev/rails/hannemann/test/unit,~/dev/rails/hannemann/test/functional,~/dev/rails/hannemann/test/integration,~/dev/rails/hannemann/spec,~/dev/rails/hannemann/spec/models,~/dev/rails/hannemann/spec/controllers,~/dev/rails/hannemann/spec/helpers,~/dev/rails/hannemann/spec/views,~/dev/rails/hannemann/spec/lib,~/dev/rails/hannemann/spec/requests,~/dev/rails/hannemann/spec/integration,~/dev/rails/hannemann/app/*,~/dev/rails/hannemann/vendor,~/dev/rails/hannemann/vendor/plugins/*/lib,~/dev/rails/hannemann/vendor/plugins/*/test,~/dev/rails/hannemann/vendor/rails/*/lib,~/dev/rails/hannemann/vendor/rails/*/test,/usr/include,,,~/Projects/core/app/**,~Projects/core/lib/**
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'voomtree'
+setlocal syntax=voomtree
+endif
+setlocal tabstop=2
+setlocal tags=~/dev/rails/hannemann/tmp/tags,~/dev/rails/hannemann/.git/tags,./tags,tags,~/dev/rails/hannemann/tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal nowinfixheight
+setlocal winfixwidth
+setlocal nowrap
+setlocal wrapmargin=0
+wincmd w
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 26 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 115 + 97) / 194)
+exe 'vert 3resize ' . ((&columns * 51 + 97) / 194)
+tabnext 1
+if exists('s:wipebuf')
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 shortmess=aIoOTts
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if file_readable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

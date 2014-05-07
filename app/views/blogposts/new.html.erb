@@ -1,0 +1,18 @@
+<% provide(:title, "Blogpost schreiben") %>
+<h1>Blogpost schreiben</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@blogpost) do |f| %>
+
+      <%= f.label :titel %>
+      <%= f.text_field :titel %>
+
+      <%= f.label :inhalt %>
+      <%= f.text_area :inhalt %>
+
+      <%= f.submit "Blogpost speichern", class: "btn btn-large btn-primary"%>
+    <% end %>
+  </div>
+</div>
+

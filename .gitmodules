@@ -1,0 +1,6 @@
+[submodule "vendor/akzahn"]
+	path = vendor/akzahn
+	url = https://github.com/akzhan/jwysiwyg.git
+[submodule "vendor/nicedit"]
+	path = vendor/nicedit
+	url = https://github.com/danishkhan/NicEdit.git

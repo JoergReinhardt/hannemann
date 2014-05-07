@@ -1,0 +1,13 @@
+<% provide(:title, @blogpost.titel) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @blogpost.titel %>
+      </h1>
+    </section>
+  </aside>
+  <div id="inhalt" >
+    <%= @blogpost.inhalt %>
+  </div>
+</div>
